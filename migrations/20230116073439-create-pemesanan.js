@@ -33,7 +33,7 @@ module.exports = {
       jumlah_kamar: {
         type: Sequelize.INTEGER
       },
-      id_tipe_kamar: {
+      tipeKamarId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -44,7 +44,7 @@ module.exports = {
       status_pemesanan: {
         type: Sequelize.ENUM('baru','check_in','check_out')
       },
-      id_user: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
