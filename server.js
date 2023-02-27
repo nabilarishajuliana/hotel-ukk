@@ -17,6 +17,8 @@ app.use(bodyParser.json())
 const userRoute = require("./routes/user_routes") 
 const tipekamarRoute = require("./routes/tipe_kamar_routes") 
 const kamarRoute = require("./routes/kamar_routes") 
+const pemesananRoute = require("./routes/pemesanan_routes") 
+
 
 // const adminRoute = require("./routes/admin_routes")
 
@@ -24,6 +26,8 @@ const kamarRoute = require("./routes/kamar_routes")
 app.use('/user', userRoute)
 app.use('/tipeKamar', tipekamarRoute)
 app.use('/kamar', kamarRoute)
+app.use('/pemesanan', pemesananRoute)
+
 
 // app.use(`/admin`, adminRoute)
 
