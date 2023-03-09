@@ -55,14 +55,18 @@ exports.getPemesanan = async (request, response) => {
 
   let check = await sequelize.query(
     
-    `SELECT pemesanans.nama_pemesanan , tipe_kamars.nama_tipe_kamar , kamars.nomor_kamar FROM tipe_kamars JOIN pemesanans ON pemesanans.tipeKamarId = tipe_kamars.id JOIN kamars ON kamars.tipeKamarId = tipe_kamars.id `
+    `SELECT pemesanans.nama_pemesanan, tipe_kamars.nama_tipe_kamar, kamars.nomor_kamar
+    FROM tipe_kamars
+    JOIN pemesanans ON pemesanans.tipeKamarId = tipe_kamars.id
+    JOIN kamars ON kamars.tipeKamarId = tipe_kamars.id
+    GROUP BY pemesanans.nama_pemesanan, tipe_kamars.nama_tipe_kamar, kamars.nomor_kamar;`
   );
   console.log(check);
   try {
     return response.json({
       success: true,
-      data: check,
-      message: `semua data sukses ditampilkan sesuai yang anda minta tuan`
+      data: check[0],
+      message: `semua data sukses ditampilkan `
       
     })
 
