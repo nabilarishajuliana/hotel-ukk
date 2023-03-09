@@ -5,6 +5,7 @@ const pemesananController = require(`../controller/pemesanan_controller`)
 
 
 app.get("/getAllKamar", pemesananController.getAllPemesanan)
+app.get("/getPemesanan", pemesananController.getPemesanan)
 app.post("/findKamar", pemesananController.findPemesanan)
 app.post("/addPemesanan", pemesananController.addPemesanan)
 app.put("/updateKamar/:id", pemesananController.updatePemesanan)

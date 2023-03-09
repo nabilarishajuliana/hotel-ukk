@@ -10,6 +10,52 @@ const path = require(`path`)
 const fs = require(`fs`)
 
 const upload = require(`./upload-cover`).single(`foto`)
+const jsonwebtoken = require("jsonwebtoken")
+const SECRET_KEY = "secretcode"
+
+
+exports.login = async (request, response) => {
+  try{
+      const params = {
+          email: request.body.email,
+          password: md5(request.body.password),
+      };
+      
+      const findUser = await userModel.findOne({where:params});
+      if (findUser == null){
+          return response.status(404).json({
+              message: "email or password doesn't match",
+              err: error,
+          });
+      }
+      console.log(findUser)
+      let tokenPayload = {
+          id_user: findUser.id,
+          email: findUser.email,
+          role: findUser.role,
+      };
+      
+      tokenPayload = JSON.stringify(tokenPayload);
+      let token =  jsonwebtoken.sign(tokenPayload, SECRET_KEY);
+      
+      return response.status(200).json({
+          message: "success login",
+          data: {
+              token: token,
+              id_user: findUser.id,
+              email: findUser.email,
+              role: findUser.role,
+          },
+      });
+  }
+  catch(err){
+      return response.status(500).json({
+          message: "internal error " + err,
+          
+      });
+      
+  }
+};
 
 
 exports.getAllUser = async (request, response) => {
